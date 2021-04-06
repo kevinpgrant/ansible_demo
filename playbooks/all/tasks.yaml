@@ -1,0 +1,12 @@
+---
+
+- name: Update and upgrade Apt packages
+  become: true
+  apt:
+    upgrade: "yes" # yes, no, dist, full, safe
+    update_cache: yes
+    cache_valid_time: 86400 # 24h
+
+- name: ensure NTP service
+  become: true
+  apt: package=ntp state=present
