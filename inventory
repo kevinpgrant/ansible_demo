@@ -1,6 +1,5 @@
-[bastion]
-10.0.0.10
+[dev_bastion]
+dev_bastion
 
-
-[jenkins]
-10.0.0.20
+[dev_jenkins]
+dev_jenkins
