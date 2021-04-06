@@ -18,4 +18,7 @@ Second step is to decide if you want to extend the playbook with a handler (whic
 
 For the purpose of this exercise I have shown the latter, using the other ad-hoc command mode of ansible to perform this step. To launch Jenkins, you can run the ammand `ansible dev_jenkins -m shell -a "cd /opt/jenkins; docker-compose up -d" -b -i inventory`
 
-This will connect to the remote VM and manually start the docker compose stack
+This will connect to the remote VM and manually start the docker compose stack.
+
+
+As a convenience, a Makefile is also included, you can use `make jenkins` to initialise the Jenkins CI service also, perhaps replacing direct use of docker-compose in the above command, so you can recreate the same environment locally. It also allows for seeding jobs, and other tasks, which could also be incorporated as handlers e.g. if you wanted to install plugins to run at startup in /var/jenkins_home/init.groovy.d in the container, and have it down/up jenkins to reload them on change (not shown)
