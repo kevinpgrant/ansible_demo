@@ -1,0 +1,13 @@
+---
+
+- name: ensure docker service present
+  become: true
+  apt: package=docker.io state=present
+
+- name: ensure httpie package present
+  become: true
+  apt: package=httpie state=present
+
+- name: ensure docker-compose package present
+  become: true
+  apt: package=docker-compose state=present

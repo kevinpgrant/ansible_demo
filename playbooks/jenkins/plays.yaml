@@ -1,0 +1,15 @@
+---
+
+- hosts:
+  - dev_jenkins
+
+  pre_tasks:
+    - name: Update Apt cache if necessary
+      become: true
+      apt: update_cache=yes cache_valid_time=3600
+
+  roles:
+    - role: "../roles/jenkins"
+
+  tasks:
+    - include: "./tasks.yaml"
