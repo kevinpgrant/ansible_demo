@@ -1,0 +1,7 @@
+---
+
+- name: import playbook for all
+  import_playbook: "all/plays.yaml"
+
+- name: import playbook for jenkins
+  import_playbook: "jenkins/plays.yaml"
