@@ -1,0 +1,18 @@
+---
+
+- name: create directory
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: jenkins_admin
+    group: jenkins_admin
+    mode: 0775
+  loop:
+    - /opt/jenkins
+
+- name: Install docker-compose.yaml
+  template:
+    src: docker-compose.yaml.j2
+    dest: /opt/jenkins/docker-compose.yaml
+    mode: 0644
