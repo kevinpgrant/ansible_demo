@@ -10,6 +10,10 @@
     mode: 0775
   loop:
     - /opt/jenkins
+    - /opt/jenkins/volume
+    - /opt/jenkins/volume/jenkins_home
+    - /opt/jenkins/resources
+    - /opt/jenkins/resources/init.groovy.d
 
 - name: Install docker-compose.yaml
   template:

@@ -1,1 +1,22 @@
 ---
+version: '3.7'
+services:
+  init:
+    image:  jenkins/jenkins:lts
+    volumes:
+    - ".:/init"
+    command: mkdir -p /init/volume/jenkins_home
+    restart: 'no'
+  jenkins:
+    depends_on:
+    - init
+    build: "."
+    ports:
+    - "8080:8080"
+    volumes:
+    - "./volume/jenkins_home:/var/jenkins_home"
+    - "./resources/init.groovy.d:/var/jenkins_home/init.groovy.d"
+    - "/var/run/docker.sock:/var/run/docker.sock:rw"
+    restart: always
+    environment:
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
