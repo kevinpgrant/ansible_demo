@@ -1,0 +1,25 @@
+FROM jenkins/jenkins:lts
+
+USER root
+
+RUN apt-get update && \
+  apt-get install -y make \
+  zip \
+  apt-transport-https \
+  ca-certificates \
+  gnupg2 \
+  software-properties-common
+
+ADD https://download.docker.com/linux/debian/gpg /tmp/docker-gpg-key
+
+RUN apt-key add /tmp/docker-gpg-key
+
+RUN add-apt-repository \
+  "deb [arch=amd64] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) \
+  stable"
+
+RUN apt-get update && \
+apt-get install -y docker-ce-cli
+
+USER jenkins

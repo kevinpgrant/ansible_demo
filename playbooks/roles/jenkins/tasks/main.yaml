@@ -10,8 +10,6 @@
     mode: 0775
   loop:
     - /opt/jenkins
-    - /opt/jenkins/volume
-    - /opt/jenkins/volume/jenkins_home
     - /opt/jenkins/resources
     - /opt/jenkins/resources/init.groovy.d
 
@@ -19,6 +17,12 @@
   template:
     src: docker-compose.yaml.j2
     dest: /opt/jenkins/docker-compose.yaml
+    mode: 0644
+
+- name: Install Dockerfile
+  template:
+    src: Dockerfile.j2
+    dest: /opt/jenkins/Dockerfile
     mode: 0644
 
 - name: Install Makefile
