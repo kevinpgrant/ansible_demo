@@ -20,3 +20,9 @@
     src: docker-compose.yaml.j2
     dest: /opt/jenkins/docker-compose.yaml
     mode: 0644
+
+- name: Install Makefile
+  template:
+    src: Makefile.j2
+    dest: /opt/jenkins/Makefile
+    mode: 0644

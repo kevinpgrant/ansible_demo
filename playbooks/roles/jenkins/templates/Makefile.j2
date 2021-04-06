@@ -1,0 +1,22 @@
+.PHONY: jenkins down jobs seed clean git
+
+jenkins:
+	docker pull jenkins/jenkins:lts
+	docker-compose up -d --build jenkins
+
+down:
+	docker-compose down
+
+jobs: seed
+	java -jar jenkins-cli.jar -noKeyAuth -s http://localhost:8080/ build job-seed -p BRANCH=master -p ACCOUNT=local
+
+seed: jenkins
+	test -f jenkins-cli.jar || wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+	(java -jar jenkins-cli.jar -noKeyAuth -s http://localhost:8080/ create-job job-seed < job/job-seed.xml) || true
+
+clean: down
+	rm -rf volume
+
+git: jenkins
+	docker-compose exec jenkins git config --global user.email nobody@example.com
+	docker-compose exec jenkins git config --global user.name "Mr Jenkins"
